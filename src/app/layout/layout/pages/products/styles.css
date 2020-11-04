@@ -1,0 +1,40 @@
+
+.products {
+    margin: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.products .product {
+    
+    padding: 0.5rem 1rem;
+    margin: 0.25rem;
+    border-color: gray;
+    border: 1px solid gray;
+    max-width: 350px;
+    position: relative;
+}
+
+.products .product .add-to-cart {
+    position: absolute;
+    top: calc(50% - 100px / 2);
+    left: calc(50% - 100px / 2) ;
+    font-size: 4rem;
+    padding: 1rem;
+    border: 1px solid black;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    
+}
+
+.products .product .add-to-cart div {
+    font-size: 1rem;
+    
+}
+
+.products .product.hover {
+    
+    background-color: lightgray;
+}
