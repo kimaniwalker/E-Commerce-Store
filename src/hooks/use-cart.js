@@ -4,7 +4,7 @@ export default function UseCart(props) {
         () => JSON.parse(localStorage.getItem('cart')) || []
     );
 
-    
+
 
 
 
@@ -14,19 +14,38 @@ export default function UseCart(props) {
 
 
 
-    function addToCart(product,id) {
-        
+    function addToCart(product) {
+        setCart((prev) => {
+            const existing = cart.find((item) => item.id === product.id,);
+
+            return existing
+                ? [...cart.map((item) => item.id === product.id
+                    ? { ...item, qty: item.qty + 1 }
+                    : item,
+                ),
+                ]
+                : [...prev, { ...product, qty: 1 }]
+
+        })
 
 
-        
-        setCart((prev) => [...prev, product])
-        localStorage.setItem('cart', JSON.stringify([...cart, product]))
 
-    
+
+        /* setCart((prev) => [...prev, { ...product , qty:1 }])
+        localStorage.setItem('cart', JSON.stringify([...cart, product])) */
+
+
 
     }
 
-    
+    function changeQty(product, qty) {
+        if (qty === 0 ) return removeCartItem(product.id)
+        setCart((prev) => [
+            ...prev.map((item) => item.id === product.id ? { ...item, qty } : item,)
+        ])
+    }
+
+
 
     function getCartItems() {
         const data = localStorage.getItem('cart')
@@ -39,23 +58,23 @@ export default function UseCart(props) {
         return cart;
     }
 
-    const removeCartItem = (id) => {
+    function removeCartItem(id) {
         const itemId = getItemId(id)
         console.log(itemId)
-        
-        if(!itemId) return []
+
+        if (!itemId) return []
         const result = cart.filter(cartItem => cartItem.id !== itemId)
         console.log(result)
-        
+
         setCart(result)
         return result
 
-    
+
     }
 
     function getItemId(id) {
         return id
-        
+
     }
 
     return {
@@ -63,6 +82,7 @@ export default function UseCart(props) {
         addToCart,
         getCartItems,
         clearCartItems,
-        removeCartItem
+        removeCartItem,
+        changeQty,
     }
 }

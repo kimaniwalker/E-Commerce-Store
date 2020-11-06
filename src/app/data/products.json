@@ -2,6 +2,7 @@
     {
         "id": 12345678,
         "name": "Giuseppe Zanotti Men's Ru70009q Sneaker",
+        "price": 290,
         "sizes": [
             {
                 "name": "small",
@@ -37,6 +38,7 @@
     {
         "id": 2345678,
         "name": "Giuseppe Zanotti Men's Ru70009q Sneaker",
+        "price": 295,
         "sizes": [
             {
                 "name": "small",

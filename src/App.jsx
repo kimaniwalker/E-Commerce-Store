@@ -10,8 +10,9 @@ import Homepage from './app/layout/layout/pages/homepage'
 import AboutUs from './app/layout/layout/pages/aboutUs';
 import Products from './app/layout/layout/pages/products';
 import Cart from './app/layout/layout/pages/cart';
-import cartContext from './cart-modules/cart-context';
+import CartContext from './cart-modules/cart-context';
 import UseCart from './hooks/use-cart';
+import CheckoutPage from './app/layout/layout/pages/checkout';
 
 
 
@@ -22,15 +23,16 @@ export default function App(props) {
   useEffect(() => {
     setCounter((prev) => prev + 1)
   }, []);
-  const { cart, addToCart, getCartItems, clearCartItems, removeCartItem } = UseCart([])
+  const { cart, addToCart, getCartItems, clearCartItems, removeCartItem, changeQty } = UseCart([])
   return (
     <>
-      <cartContext.Provider value={{
+      <CartContext.Provider value={{
         cart,
         addToCart,
         getCartItems,
         clearCartItems,
-        removeCartItem
+        removeCartItem,
+        changeQty,
       }}>
 
         <BrowserRouter>
@@ -54,6 +56,10 @@ export default function App(props) {
                 <Cart />
               </Route>
 
+              <Route exact path='/checkout'>
+                <CheckoutPage />
+              </Route>
+
             </Switch>
           </Layout>
 
@@ -61,7 +67,7 @@ export default function App(props) {
 
 
 
-      </cartContext.Provider>
+      </CartContext.Provider>
     </>
   )
 }
